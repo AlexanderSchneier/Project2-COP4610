@@ -1,35 +1,159 @@
-# Project2-COP4610
-Project2
-Project 2: Division of Labor
-COP4610: Operating Systems
+# Elevator
+
+[Description]
+
+## Group Members
+- **John Doe**: jd19@fsu.edu
+- **Jane Smith**: js19@fsu.edu
+- **Alex Brown**: ab19@fsu.edu
+## Division of Labor
+
+### Part 1: System Call Tracing
+- **Responsibilities**: [Description]
+- **Assigned to**: John Doe
+
+### Part 2: Timer Kernel Module
+- **Responsibilities**: [Description]
+- **Assigned to**: Jane Smith
+
+### Part 3a: Adding System Calls
+- **Responsibilities**: [Description]
+- **Assigned to**: Alex Brown
+
+### Part 3b: Kernel Compilation
+- **Responsibilities**: [Description]
+- **Assigned to**: Alex Brown, Jane Smith
+
+### Part 3c: Threads
+- **Responsibilities**: [Description]
+- **Assigned to**: Alex Brown, Jane Smith
+
+### Part 3d: Linked List
+- **Responsibilities**: [Description]
+- **Assigned to**: Jane Smith
+
+### Part 3e: Mutexes
+- **Responsibilities**: [Description]
+- **Assigned to**: John Doe
+
+### Part 3f: Scheduling Algorithm
+- **Responsibilities**: [Description]
+- **Assigned to**: Alex Brown, John Doe
+
+## File Listing
+```
+elevator/
+├── Makefile
+├── part1/
+│   ├── empty.c
+│   ├── empty.trace
+│   ├── part1.c
+│   ├── part1.trace
+│   └── Makefile
+├── part2/
+│   ├── src/
+│   └── Makefile
+├── part3/
+│   ├── src/
+│   ├── tests/
+│   ├── Makefile
+│   └── sys_call.c
+├── Makefile
+└── README.md
+
+```
+# How to Compile & Execute
+
+### Requirements
+- **Compiler**: e.g., `gcc` for C/C++, `rustc` for Rust.
+- **Dependencies**: List any libraries or frameworks necessary (rust only).
+
+## Part 1
+
+### Compilation
+For a C/C++ example:
+```bash
+make
+```
+This will build the executable in ...
+### Execution
+```bash
+make run
+```
+This will run the program ...
+
+## Part 2
+
+### Compilation
+For a C/C++ example:
+```bash
+make
+```
+This will build the executable in ...
+### Execution
+```bash
+make run
+```
+This will run the program ...
 
 
-Team Members:
-1. Alexander Schneier
-2. Brendan Boedy
-3. Carson Cary
+## Part 3
 
-   
-Part 1: System Call Tracing
-- [Members]
+### Compilation
+For a C/C++ example:
+```bash
+make
+```
+This will build the executable in ...
+### Execution
+```bash
+make run
+```
+This will run the program ...
 
-Part 2: Timer Kernel Module
-- [Members]
+## Development Log
+Each member records their contributions here.
 
-Part 3a: Adding System Calls
-- [Members]
+### [Member 1]
 
-Part 3b: Kernel Compilation
-- [Members]
+| Date       | Work Completed / Notes |
+|------------|------------------------|
+| YYYY-MM-DD | [Description of task]  |
+| YYYY-MM-DD | [Description of task]  |
+| YYYY-MM-DD | [Description of task]  |
 
-Part 3c: Threads
-- [Members]
+### [Member 2]
 
-Part 3d: Linked List
-- [Members]
+| Date       | Work Completed / Notes |
+|------------|------------------------|
+| YYYY-MM-DD | [Description of task]  |
+| YYYY-MM-DD | [Description of task]  |
+| YYYY-MM-DD | [Description of task]  |
 
-Part 3e: Mutexes
-- [Members]
 
-Part 3f: Scheduling Algorithm
-- [Members]
+### [Member 3]
+
+| Date       | Work Completed / Notes |
+|------------|------------------------|
+| YYYY-MM-DD | [Description of task]  |
+| YYYY-MM-DD | [Description of task]  |
+| YYYY-MM-DD | [Description of task]  |
+
+
+## Meetings
+Document in-person meetings, their purpose, and what was discussed.
+
+| Date       | Attendees            | Topics Discussed | Outcomes / Decisions |
+|------------|----------------------|------------------|-----------------------|
+| YYYY-MM-DD | [Names]              | [Agenda items]   | [Actions/Next steps]  |
+| YYYY-MM-DD | [Names]              | [Agenda items]   | [Actions/Next steps]  |
+| YYYY-MM-DD | [Names]              | [Agenda items]   | [Actions/Next steps]  |
+
+
+
+## Bugs
+- **Bug 1**: This is bug 1.
+- **Bug 2**: This is bug 2.
+- **Bug 3**: This is bug 3.
+
+## Considerations
