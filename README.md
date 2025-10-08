@@ -3,42 +3,42 @@
 [Description]
 
 ## Group Members
-- **John Doe**: jd19@fsu.edu
-- **Jane Smith**: js19@fsu.edu
-- **Alex Brown**: ab19@fsu.edu
+- **Brendan Boedy**: jd19@fsu.edu
+- **Carson Cary**: js19@fsu.edu
+- **Alexander Schneier**: ab19@fsu.edu
 ## Division of Labor
 
 ### Part 1: System Call Tracing
 - **Responsibilities**: [Description]
-- **Assigned to**: John Doe
+- **Assigned to**: Alexander Schneier
 
 ### Part 2: Timer Kernel Module
 - **Responsibilities**: [Description]
-- **Assigned to**: Jane Smith
+- **Assigned to**: Brendan Boedy
 
 ### Part 3a: Adding System Calls
 - **Responsibilities**: [Description]
-- **Assigned to**: Alex Brown
+- **Assigned to**: Carson Cary
 
 ### Part 3b: Kernel Compilation
 - **Responsibilities**: [Description]
-- **Assigned to**: Alex Brown, Jane Smith
+- **Assigned to**: Alexander Schneier, Brendan Boedy
 
 ### Part 3c: Threads
 - **Responsibilities**: [Description]
-- **Assigned to**: Alex Brown, Jane Smith
+- **Assigned to**: Brendan Boedy, Carson Cary 
 
 ### Part 3d: Linked List
 - **Responsibilities**: [Description]
-- **Assigned to**: Jane Smith
+- **Assigned to**: Alexander Schneier, Brendan Boedy
 
 ### Part 3e: Mutexes
 - **Responsibilities**: [Description]
-- **Assigned to**: John Doe
+- **Assigned to**: Carson Cary
 
 ### Part 3f: Scheduling Algorithm
 - **Responsibilities**: [Description]
-- **Assigned to**: Alex Brown, John Doe
+- **Assigned to**: Alexadner Schneier, Carson Cary
 
 ## File Listing
 ```
@@ -157,3 +157,4 @@ Document in-person meetings, their purpose, and what was discussed.
 - **Bug 3**: This is bug 3.
 
 ## Considerations
+
