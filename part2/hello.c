@@ -41,17 +41,15 @@ static const struct proc_ops procfile_fops = {
 static int __init hello_init(void)
 {
     proc_entry = proc_create(ENTRY_NAME, PERMS, PARENT, &procfile_fops);
-    if (proc_entry == NULL)
+    if (proc_entry == NULL){
         return -ENOMEM;
-
-    printk(KERN_INFO "/proc/%s created\n", ENTRY_NAME);
+    }
     return 0;
 }
 
 static void __exit hello_exit(void)
 {
     proc_remove(proc_entry);
-    printk(KERN_INFO "/proc/%s removed\n", ENTRY_NAME);
 }
 
 module_init(hello_init);
