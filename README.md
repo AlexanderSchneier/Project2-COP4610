@@ -3,7 +3,7 @@
 [Description]
 
 ## Group Members
-- **Brendan Boedy**: jd19@fsu.edu
+- **Brendan Boedy**: bsb23a@fsu.edu
 - **Carson Cary**: js19@fsu.edu
 - **Alexander Schneier**: ab19@fsu.edu
 ## Division of Labor
@@ -114,7 +114,7 @@ This will run the program ...
 ## Development Log
 Each member records their contributions here.
 
-### [Member 1]
+### [Lex]
 
 | Date       | Work Completed / Notes |
 |------------|------------------------|
@@ -122,16 +122,16 @@ Each member records their contributions here.
 | YYYY-MM-DD | [Description of task]  |
 | YYYY-MM-DD | [Description of task]  |
 
-### [Member 2]
+### [Brendan]
 
 | Date       | Work Completed / Notes |
 |------------|------------------------|
-| YYYY-MM-DD | [Description of task]  |
+| 2025-10-22 | [Set up VM and construction of Kernel Module for part 2]  |
 | YYYY-MM-DD | [Description of task]  |
 | YYYY-MM-DD | [Description of task]  |
 
 
-### [Member 3]
+### [Carson]
 
 | Date       | Work Completed / Notes |
 |------------|------------------------|
@@ -145,7 +145,7 @@ Document in-person meetings, their purpose, and what was discussed.
 
 | Date       | Attendees            | Topics Discussed | Outcomes / Decisions |
 |------------|----------------------|------------------|-----------------------|
-| YYYY-MM-DD | [Names]              | [Agenda items]   | [Actions/Next steps]  |
+| 2025-10-17 | [Lex, Brendan, Carson]              | [Part 1 and 2]   | [Completed Part 1, requested VM for Part 2 and 3]  |
 | YYYY-MM-DD | [Names]              | [Agenda items]   | [Actions/Next steps]  |
 | YYYY-MM-DD | [Names]              | [Agenda items]   | [Actions/Next steps]  |
 
@@ -157,4 +157,5 @@ Document in-person meetings, their purpose, and what was discussed.
 - **Bug 3**: This is bug 3.
 
 ## Considerations
+
 
