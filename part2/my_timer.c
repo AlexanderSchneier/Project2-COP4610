@@ -25,15 +25,18 @@ static DEFINE_MUTEX(lock);
 static ssize_t procfile_read(struct file *file, char __user *ubuf,
                              size_t count, loff_t *ppos)
 {
+    //create two timespec structs for current time and last time
     struct timespec64 now, delta;
     size_t len = 0;
 
     if (*ppos > 0){
         return 0;
     }
+    //lock while getting time
     mutex_lock(&lock);
     ktime_get_real_ts64(&now);
     len += scnprintf(msg + len, BUF_LEN - len, "current time: %lld.%09ld\n", (long long)now.tv_sec, (long)now.tv_nsec);
+    //check if last_valid, obtain time since if true
     if (last_valid) {
         // compute difference manually (delta = now - last_ts)
         delta.tv_sec = now.tv_sec - last_ts.tv_sec;
@@ -47,6 +50,7 @@ static ssize_t procfile_read(struct file *file, char __user *ubuf,
                          "elapsed time: %lld.%09ld\n",
                          (long long)delta.tv_sec, (long)delta.tv_nsec);
     }
+    //set last time spec and last valid
     last_ts = now;
     last_valid = true;
     msg_len = len;
@@ -60,7 +64,7 @@ static ssize_t procfile_read(struct file *file, char __user *ubuf,
     *ppos = msg_len;
     return msg_len;
 }
-
+//set proc read
 static const struct proc_ops procfile_fops = {
     .proc_read = procfile_read,
 };
