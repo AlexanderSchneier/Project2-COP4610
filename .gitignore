@@ -4,4 +4,4 @@
 *.ko
 *.order
 *.cache/
-*symvers
+*.symvers
