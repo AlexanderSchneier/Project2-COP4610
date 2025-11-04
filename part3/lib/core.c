@@ -323,5 +323,3 @@ ssize_t proc_read(struct file* file, char __user* buffer, size_t count, loff_t* 
     return len;
 }
 
-
-lexlexlex
