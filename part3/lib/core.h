@@ -58,7 +58,6 @@ int elev_worker(void* data);
 void board_waiting_pets(struct list_head* floor_q);
 struct waiting_pet* pop_queue(struct list_head* floor_q);
 void unload_pets(void);
-void write_elevator_state(void);
 
 char* queue_to_str(struct list_head* queue);
 int get_queue_size(struct list_head* queue);

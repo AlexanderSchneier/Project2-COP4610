@@ -20,10 +20,10 @@ extern int (*STUB_issue_request)(int, int, int);
 extern int (*STUB_stop_elevator)(void);
 
 static int start_elevator(void) {
-
     printk(KERN_INFO "Starting elevator thread");
-    if (elevator->state != OFFLINE || worker_thread == NULL) {
-        return 0;
+    if (elevator->state != OFFLINE) {
+        printk(KERN_WARNING "Elevator crazy wonkus bro its already on!");
+        return 1;
     }
 
     elevator->state = IDLE;
@@ -31,7 +31,8 @@ static int start_elevator(void) {
     return 0;
 }
 
-static int issue_reqeuest(int start, int dest, int type) {
+static int issue_request(int start, int dest, int type) {
+    printk(KERN_INFO "Elevator ISSUING request");
     struct waiting_pet* patient_pet = kmalloc(sizeof(struct waiting_pet), GFP_KERNEL);
     struct pet_s* pet = kmalloc(sizeof(struct pet_s), GFP_KERNEL);
 
@@ -41,16 +42,16 @@ static int issue_reqeuest(int start, int dest, int type) {
 
     switch (pet->type) {
         case (T_CHIHUAHUA):
-            pet->weight += 3;
+            pet->weight = 3;
             break;
         case (T_PUG):
-            pet->weight += 14;
+            pet->weight = 14;
             break;
         case (T_PUGHUAHUA):
-            pet->weight += 10;
+            pet->weight = 10;
             break;
         case (T_DACHSHUND):
-            pet->weight += 16;
+            pet->weight = 16;
             break;
     }
 
@@ -58,7 +59,7 @@ static int issue_reqeuest(int start, int dest, int type) {
 
     mutex_lock(&elev_lock);
     elevator->num_pets_waiting += 1;
-    list_add_tail(&patient_pet->node, &floor_queues[start].node);
+    list_add_tail(&patient_pet->node, &floor_queues[start - 1].node);
     mutex_unlock(&elev_lock);
 
     printk(KERN_INFO "Added pet to floor %d queue", start);
@@ -67,10 +68,14 @@ static int issue_reqeuest(int start, int dest, int type) {
 }
 
 static int elevator_stop(void) {
-    // this will signal the thread to stop, which in core.c will wait until the elevator can reach an idle state
-    kthread_stop(worker_thread);
-    printk(KERN_INFO "Stopping elevator thread");
-    return 0;
+    if (worker_thread) {
+        kthread_stop(worker_thread);
+        worker_thread = NULL;
+        printk(KERN_INFO "Stopping elevator thread");
+        return 0;
+    }
+    printk(KERN_WARNING "Elevator already stopped or never started.\n");
+    return 1;
 }
 
 static const struct proc_ops
@@ -82,16 +87,18 @@ static int __init initialize_elevator(void) {
     // This initializes the stubs so that when the kernel calls
     // STUB_start_elevator these functions will be called
     STUB_start_elevator = &start_elevator;
-    STUB_issue_request = &issue_reqeuest;
+    STUB_issue_request = &issue_request;
     STUB_stop_elevator = &elevator_stop;
     mutex_init(&elev_lock);
 
-    printk(KERN_INFO "Loaded elevator module.");
+    printk(KERN_INFO "Loaded elevator module FROM OVER HERE.");
 
     // Not sure if its neccecary here cause we haven't started the elevator thread
     // yet infact, maybe we should do this initialization in the elevator thread,
     // idk.
     mutex_lock(&elev_lock);
+
+    printk(KERN_INFO "In lock");
     for (int i = 0; i < NUM_FLOORS; ++i) {
         INIT_LIST_HEAD(&floor_queues[i].node);
         floor_queues[i].pet = NULL;
@@ -111,6 +118,8 @@ static int __init initialize_elevator(void) {
     INIT_LIST_HEAD(&elevator->transport_queue.node);
     elevator->transport_queue.pet = NULL;
     mutex_unlock(&elev_lock);
+
+    printk(KERN_INFO "Initialized elevator and stuff");
 
     struct proc_dir_entry* entry;
     entry = proc_create(PROC_FNAME, 0444, NULL,
@@ -132,6 +141,7 @@ static void __exit rm_elevator(void) {
     STUB_stop_elevator = NULL;
 
     printk(KERN_INFO "Unloaded elevator module.");
+    elevator_stop();
 
     remove_proc_entry(PROC_FNAME, NULL);
     pr_info("/proc/%s removed\n", PROC_FNAME);

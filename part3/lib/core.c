@@ -123,6 +123,15 @@ int elev_worker(void* data) {
                                              struct waiting_pet, node);
         }
 
+        unload_pets();
+
+        // PRINT/WRITE PROC STATE HERE
+        // write_elevator_state();
+
+        int floor_idx = elevator->current_floor - 1;
+        struct list_head* floor_q = &floor_queues[floor_idx].node;
+        board_waiting_pets(floor_q);  // gets called no matter what
+
         int current_dest_floor = transport_pet->pet->dest_floor;
 
         if (current_dest_floor == elevator->current_floor) {
@@ -132,15 +141,6 @@ int elev_worker(void* data) {
         } else {
             elevator->state = DOWN;
         }
-
-        unload_pets();
-
-        // PRINT/WRITE PROC STATE HERE
-        // write_elevator_state();
-
-        int floor_idx = elevator->current_floor - 1;
-        struct list_head* floor_q = &floor_queues[floor_idx].node;
-        board_waiting_pets(floor_q);  // gets called no matter what
 
         if (kthread_should_stop()) {
             elevator->state = (elevator->state == IDLE) ? OFFLINE : elevator->state;
@@ -212,7 +212,7 @@ char* generate_proc_string(void) {
 
     for (int i = NUM_FLOORS - 1; i >= 0; --i) {
         char* floor_queue_str = queue_to_str(&floor_queues[i].node);
-        buffer_idx += scnprintf(floor_queue_str, max_sz - buffer_idx,
+        buffer_idx += scnprintf(buffer, max_sz - buffer_idx,
 
                                 elevator->current_floor == i ? "[*]"
                                                              : "[ ]"
