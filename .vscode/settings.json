@@ -1,0 +1,50 @@
+{
+    "files.exclude": {
+    "**/.cache": true,
+    "**/*.o": true,
+    "**/*.o.cmd": true,
+    "**/*.ko": true,
+    "**/*.ko.cmd": true,
+    "**/*.mod": true,
+    "**/*.mod.cmd": true,
+    "**/*.order.cmd": true,
+    "**/*.mod.c": true,
+    "**/*.mod.o": true,
+    "**/*.order": true,
+    "**/*.symvers": true,
+    "**/*.symvers.cmd": true,
+    "**/modules.order": true,
+    "**/Module.symvers": true,
+    "**/elevator.mod.c": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.hg/store/**": true,
+    "**/.cache": true,
+    "**/*.o": true,
+    "**/*.o.cmd": true,
+    "**/*.ko": true,
+    "**/*.ko.cmd": true,
+    "**/*.mod": true,
+    "**/*.mod.cmd": true,
+    "**/*.order.cmd": true,
+    "**/*.mod.c": true,
+    "**/*.mod.o": true,
+    "**/*.order": true,
+    "**/*.symvers": true,
+    "**/*.symvers.cmd": true,
+    "**/modules.order": true,
+    "**/Module.symvers": true,
+    "**/elevator.mod.c": true
+  },
+
+  "editor.formatOnSave": true,
+  "[c]": {
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+    "editor.wordBasedSuggestions": "off",
+    "editor.semanticHighlighting.enabled": true,
+    "editor.stickyScroll.defaultModel": "foldingProviderModel"
+  },
+
+}

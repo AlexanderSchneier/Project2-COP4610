@@ -1,12 +1,24 @@
 CompileFlags:
   Remove:
     - -mpreferred-stack-boundary=3
-    - -mindirect-branch-thunk-extern
+    - -mindirect-branch=thunk-extern
     - -mindirect-branch-register
+    - -mindirect-branch-cs-prefix
+    - -mfunction-return=thunk-extern
     - -fno-allow-store-data-races
     - -fconserve-stack
     - -mrecord-mcount
-    - -mindirect-branch-thunk-extern # The old one
-    - -mindirect-branch=thunk-extern # The new one
-
     - -fsanitize=bounds-strict
+    - -fsanitize=shift
+    - -fsanitize=bool
+    - -fsanitize=enum
+    # - -mpreferred-stack-boundary=3
+    # - -mindirect-branch-thunk-extern
+    # - -mindirect-branch-register
+    # - -fno-allow-store-data-races
+    # - -fconserve-stack
+    # - -mrecord-mcount
+    # - -mindirect-branch-thunk-extern # The old one
+    # - -mindirect-branch=thunk-extern # The new one
+
+    # - -fsanitize=bounds-strict

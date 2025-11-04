@@ -1,0 +1,26 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-o",
+      "consumer",
+      "consumer.c"
+    ],
+    "directory": "/home/cop4610/Project2-COP4610/part3/tests/elevator-test",
+    "file": "/home/cop4610/Project2-COP4610/part3/tests/elevator-test/consumer.c",
+    "output": "/home/cop4610/Project2-COP4610/part3/tests/elevator-test/consumer"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-o",
+      "producer",
+      "consumer.c"
+    ],
+    "directory": "/home/cop4610/Project2-COP4610/part3/tests/elevator-test",
+    "file": "/home/cop4610/Project2-COP4610/part3/tests/elevator-test/consumer.c",
+    "output": "/home/cop4610/Project2-COP4610/part3/tests/elevator-test/producer"
+  }
+]
