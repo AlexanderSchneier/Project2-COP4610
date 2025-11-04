@@ -127,8 +127,8 @@ Each member records their contributions here.
 | Date       | Work Completed / Notes |
 |------------|------------------------|
 | 2025-10-22 | [Set up VM and construction of Kernel Module for part 2]  |
-| YYYY-MM-DD | [Description of task]  |
-| YYYY-MM-DD | [Description of task]  |
+| 2025-10-29 | [Completed part 2]  |
+| 2025-10-30 | [completed part 3 steps 1-3]  |
 
 
 ### [Carson]
@@ -157,5 +157,6 @@ Document in-person meetings, their purpose, and what was discussed.
 - **Bug 3**: This is bug 3.
 
 ## Considerations
+
 
 
