@@ -190,15 +190,19 @@ int elev_worker(void* data) {
         if (elevator->state == DOWN && elevator->current_floor > 1) {
             elevator->current_floor -= 1;
             mutex_unlock(&elev_lock);
-            mdelay(2000);
+            msleep(2000);
         } else if (elevator->state == UP && elevator->current_floor < NUM_FLOORS) {
             elevator->current_floor += 1;
             mutex_unlock(&elev_lock);
-            mdelay(2000);
+            msleep(2000);
         } else {
             mutex_unlock(&elev_lock);
             msleep(100);
         }
+        if(kthread_should_stop()){
+            break;
+        }
+        msleep(50);
     }
 
     printk(KERN_INFO "Elevator worker thread stopping");

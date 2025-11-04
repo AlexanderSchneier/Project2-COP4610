@@ -68,6 +68,10 @@ static int issue_request(int start, int dest, int type) {
 }
 
 static int elevator_stop(void) {
+    mutex_lock(&elev_lock);
+        elevator->state = OFFLINE;           // <-- make it visible to /proc and worker
+    mutex_unlock(&elev_lock);
+    
     if (worker_thread) {
         kthread_stop(worker_thread);
         worker_thread = NULL;
