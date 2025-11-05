@@ -1,10 +1,10 @@
 all: consumer producer
 
 consumer: consumer.c wrappers.h
-	gcc consumer.c -o consumer
+	gcc consumer.c -o consumer.o
 
 producer: producer.c wrappers.h
-	gcc producer.c -o producer
+	gcc producer.c -o producer.o
 
 .PHONY: all run clean
 
