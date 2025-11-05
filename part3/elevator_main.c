@@ -32,6 +32,11 @@ static int start_elevator(void) {
 }
 
 static int issue_request(int start, int dest, int type) {
+    printk(KERN_INFO "ISSUE_REQUEST CALLED: start=%d, dest=%d, type=%d\n", start, dest, type);
+    if (start < 1 || start > NUM_FLOORS || dest < 1 || dest > NUM_FLOORS) {
+        printk(KERN_WARNING "Invalid floor: start=%d, dest=%d\n", start, dest);
+        return -EINVAL;
+    }
     printk(KERN_INFO "Elevator ISSUING request");
     struct waiting_pet* patient_pet = kmalloc(sizeof(struct waiting_pet), GFP_KERNEL);
     struct pet_s* pet = kmalloc(sizeof(struct pet_s), GFP_KERNEL);
