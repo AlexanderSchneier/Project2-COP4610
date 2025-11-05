@@ -7,7 +7,7 @@
 #include <linux/slab.h>  //  kmalloc/kfree
 #include <linux/string.h>
 
-#include "./lib/core.h"
+#include "./core.h"
 #include "linux/proc_fs.h"
 
 MODULE_LICENSE("GPL");

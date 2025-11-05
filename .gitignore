@@ -5,3 +5,6 @@
 *.order
 *.cache/
 *.symvers
+*compile_commands.json
+*elevator_log.txt
+*run-part3.sh

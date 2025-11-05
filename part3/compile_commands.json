@@ -2,7 +2,7 @@
   {
     "arguments": [
       "/usr/bin/gcc",
-      "-Wp,-MMD,./.elevator_main.o.d",
+      "-Wp,-MMD,src/.elevator_main.o.d",
       "-nostdinc",
       "-I/usr/src/linux-6.16.12/arch/x86/include",
       "-I/usr/src/linux-6.16.12/arch/x86/include/generated",
@@ -125,17 +125,17 @@
       "-D__KBUILD_MODNAME=kmod_elevator",
       "-c",
       "-o",
-      "elevator_main.o",
-      "elevator_main.c"
+      "src/elevator_main.o",
+      "src/elevator_main.c"
     ],
     "directory": "/home/cop4610/Project2-COP4610/part3",
-    "file": "/home/cop4610/Project2-COP4610/part3/elevator_main.c",
-    "output": "/home/cop4610/Project2-COP4610/part3/elevator_main.o"
+    "file": "/home/cop4610/Project2-COP4610/part3/src/elevator_main.c",
+    "output": "/home/cop4610/Project2-COP4610/part3/src/elevator_main.o"
   },
   {
     "arguments": [
       "/usr/bin/gcc",
-      "-Wp,-MMD,lib/.core.o.d",
+      "-Wp,-MMD,src/.core.o.d",
       "-nostdinc",
       "-I/usr/src/linux-6.16.12/arch/x86/include",
       "-I/usr/src/linux-6.16.12/arch/x86/include/generated",
@@ -258,12 +258,12 @@
       "-D__KBUILD_MODNAME=kmod_elevator",
       "-c",
       "-o",
-      "lib/core.o",
-      "lib/core.c"
+      "src/core.o",
+      "src/core.c"
     ],
     "directory": "/home/cop4610/Project2-COP4610/part3",
-    "file": "/home/cop4610/Project2-COP4610/part3/lib/core.c",
-    "output": "/home/cop4610/Project2-COP4610/part3/lib/core.o"
+    "file": "/home/cop4610/Project2-COP4610/part3/src/core.c",
+    "output": "/home/cop4610/Project2-COP4610/part3/src/core.o"
   },
   {
     "arguments": [
