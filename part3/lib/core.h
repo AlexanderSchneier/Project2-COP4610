@@ -32,7 +32,7 @@ struct pet_s {
 
 // we'll use list_entry to actually access the data (it uses byte offset to get
 // the ptr to struct... kinda cool)
-struct list_head {
+struct waiting_pet {
     struct pet_s* pet;
     struct list_head node;
 };
@@ -49,7 +49,7 @@ struct elevator {
     int state;  // OFFLINE | IDLE | etc...
 };
 
-extern struct waiting_pet floor_queues[NUM_FLOORS];
+extern struct list_head floor_queues[NUM_FLOORS];
 extern struct mutex elev_lock;  // elevator_lock
 extern struct elevator* elevator;
 extern struct task_struct* worker_thread;
