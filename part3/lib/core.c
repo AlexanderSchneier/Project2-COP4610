@@ -99,19 +99,15 @@ void unload_pets(void) {
         mdelay(1000);
     }
 }
+
 int elev_worker(void* data) {
     printk(KERN_INFO "Elevator worker thread started");
 
     while (!kthread_should_stop()) {
         mutex_lock(&elev_lock);
-        
-        printk(KERN_DEBUG "Worker loop: state=%d, floor=%d, onboard=%d, waiting=%d\n",
-               elevator->state, elevator->current_floor, 
-               elevator->num_pets_onboard, elevator->num_pets_waiting);
 
         // Check if elevator should stop
         if (elevator->state == OFFLINE) {
-            printk(KERN_INFO "Worker detected OFFLINE state, exiting\n");
             mutex_unlock(&elev_lock);
             break;
         }
@@ -123,24 +119,19 @@ int elev_worker(void* data) {
             for (int i = 0; i < NUM_FLOORS; ++i) {
                 if (!list_empty(&floor_queues[i])) {
                     all_empty = 0;
-                    printk(KERN_DEBUG "Floor %d has waiting pets\n", i+1);
                     break;
                 }
             }
 
             if (all_empty) {
-                printk(KERN_DEBUG "All queues empty, staying IDLE\n");
                 elevator->state = IDLE;
                 mutex_unlock(&elev_lock);
                 msleep(100);  // Sleep briefly when idle
                 continue;
-            } else {
-                printk(KERN_DEBUG "Found waiting pets, proceeding with service\n");
             }
         }
 
         // Unload pets at current floor
-        printk(KERN_DEBUG "Setting state to LOADING\n");
         elevator->state = LOADING;
         unload_pets();
 
@@ -158,18 +149,13 @@ int elev_worker(void* data) {
 
         if (transport_pet != NULL && transport_pet->pet != NULL) {
             int current_dest_floor = transport_pet->pet->dest_floor;
-            
-            printk(KERN_DEBUG "Pet on board going to floor %d\n", current_dest_floor);
 
             if (current_dest_floor < elevator->current_floor) {
                 elevator->state = DOWN;
-                printk(KERN_DEBUG "Moving DOWN\n");
             } else if (current_dest_floor > elevator->current_floor) {
                 elevator->state = UP;
-                printk(KERN_DEBUG "Moving UP\n");
             } else {
                 elevator->state = LOADING;
-                printk(KERN_DEBUG "Already at destination, LOADING\n");
             }
         } else {
             // No pets on board, find nearest waiting pet
@@ -188,33 +174,24 @@ int elev_worker(void* data) {
             }
 
             if (nearest_floor != -1) {
-                printk(KERN_DEBUG "No pets on board, nearest waiting floor is %d\n", nearest_floor);
                 if (nearest_floor < elevator->current_floor) {
                     elevator->state = DOWN;
-                    printk(KERN_DEBUG "Moving DOWN to pick up\n");
                 } else if (nearest_floor > elevator->current_floor) {
                     elevator->state = UP;
-                    printk(KERN_DEBUG "Moving UP to pick up\n");
                 } else {
                     elevator->state = LOADING;
-                    printk(KERN_DEBUG "At pickup floor, LOADING\n");
                 }
             } else {
-                printk(KERN_DEBUG "No waiting pets found, going IDLE\n");
                 elevator->state = IDLE;
             }
         }
 
         // Move the elevator
         if (elevator->state == DOWN && elevator->current_floor > 1) {
-            printk(KERN_INFO "Elevator moving from floor %d to %d\n", 
-                   elevator->current_floor, elevator->current_floor - 1);
             elevator->current_floor -= 1;
             mutex_unlock(&elev_lock);
             msleep(2000);
         } else if (elevator->state == UP && elevator->current_floor < NUM_FLOORS) {
-            printk(KERN_INFO "Elevator moving from floor %d to %d\n", 
-                   elevator->current_floor, elevator->current_floor + 1);
             elevator->current_floor += 1;
             mutex_unlock(&elev_lock);
             msleep(2000);
@@ -222,9 +199,7 @@ int elev_worker(void* data) {
             mutex_unlock(&elev_lock);
             msleep(100);
         }
-        
         if(kthread_should_stop()){
-            printk(KERN_INFO "kthread_should_stop returned true\n");
             break;
         }
         msleep(50);
@@ -233,114 +208,6 @@ int elev_worker(void* data) {
     printk(KERN_INFO "Elevator worker thread stopping");
     return 0;
 }
-// int elev_worker(void* data) {
-//     printk(KERN_INFO "Elevator worker thread started");
-
-//     while (!kthread_should_stop()) {
-//         mutex_lock(&elev_lock);
-
-//         // Check if elevator should stop
-//         if (elevator->state == OFFLINE) {
-//             mutex_unlock(&elev_lock);
-//             break;
-//         }
-
-//         // Check if we should be idle
-//         if (list_empty(&elevator->transport_queue.node)) {
-//             int all_empty = 1;
-
-//             for (int i = 0; i < NUM_FLOORS; ++i) {
-//                 if (!list_empty(&floor_queues[i])) {
-//                     all_empty = 0;
-//                     break;
-//                 }
-//             }
-
-//             if (all_empty) {
-//                 elevator->state = IDLE;
-//                 mutex_unlock(&elev_lock);
-//                 msleep(100);  // Sleep briefly when idle
-//                 continue;
-//             }
-//         }
-
-//         // Unload pets at current floor
-//         elevator->state = LOADING;
-//         unload_pets();
-
-//         // Board waiting pets at current floor
-//         int floor_idx = elevator->current_floor - 1;
-//         struct list_head* floor_q = &floor_queues[floor_idx];
-//         board_waiting_pets(floor_q);
-
-//         // Determine next direction
-//         struct waiting_pet* transport_pet = NULL;
-//         if (!list_empty(&elevator->transport_queue.node)) {
-//             transport_pet = list_first_entry(&elevator->transport_queue.node,
-//                                              struct waiting_pet, node);
-//         }
-
-//         if (transport_pet != NULL && transport_pet->pet != NULL) {
-//             int current_dest_floor = transport_pet->pet->dest_floor;
-
-//             if (current_dest_floor < elevator->current_floor) {
-//                 elevator->state = DOWN;
-//             } else if (current_dest_floor > elevator->current_floor) {
-//                 elevator->state = UP;
-//             } else {
-//                 elevator->state = LOADING;
-//             }
-//         } else {
-//             // No pets on board, find nearest waiting pet
-//             int nearest_floor = -1;
-//             int min_distance = NUM_FLOORS + 1;
-
-//             for (int i = 0; i < NUM_FLOORS; ++i) {
-//                 if (!list_empty(&floor_queues[i])) {
-//                     int distance = abs((i + 1) - elevator->current_floor);
-                    
-//                     if (distance < min_distance) {
-//                         min_distance = distance;
-//                         nearest_floor = i + 1;
-//                     }
-//                 }
-//             }
-
-//             if (nearest_floor != -1) {
-//                 if (nearest_floor < elevator->current_floor) {
-//                     elevator->state = DOWN;
-//                 } else if (nearest_floor > elevator->current_floor) {
-//                     elevator->state = UP;
-//                 } else {
-//                     elevator->state = LOADING;
-//                 }
-//             } else {
-//                 elevator->state = IDLE;
-//             }
-//         }
-
-//         // Move the elevator
-//         if (elevator->state == DOWN && elevator->current_floor > 1) {
-//             elevator->current_floor -= 1;
-//             mutex_unlock(&elev_lock);
-//             msleep(2000);
-//         } else if (elevator->state == UP && elevator->current_floor < NUM_FLOORS) {
-//             elevator->current_floor += 1;
-//             mutex_unlock(&elev_lock);
-//             msleep(2000);
-//         } else {
-//             mutex_unlock(&elev_lock);
-//             msleep(100);
-//         }
-//         if(kthread_should_stop()){
-//             break;
-//         }
-//         msleep(50);
-//     }
-
-//     printk(KERN_INFO "Elevator worker thread stopping");
-//     return 0;
-// }
 
 /*
  * Write to proc file stuff
