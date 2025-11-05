@@ -1,5 +1,4 @@
 obj-m += elevator.o
-
 elevator-objs := elevator_main.o lib/core.o
 
 all:
