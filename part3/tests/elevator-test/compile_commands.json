@@ -17,10 +17,10 @@
       "-c",
       "-o",
       "producer",
-      "consumer.c"
+      "producer.c"
     ],
     "directory": "/home/cop4610/Project2-COP4610/part3/tests/elevator-test",
-    "file": "/home/cop4610/Project2-COP4610/part3/tests/elevator-test/consumer.c",
+    "file": "/home/cop4610/Project2-COP4610/part3/tests/elevator-test/producer.c",
     "output": "/home/cop4610/Project2-COP4610/part3/tests/elevator-test/producer"
   }
 ]

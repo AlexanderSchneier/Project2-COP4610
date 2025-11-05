@@ -32,7 +32,8 @@ static int start_elevator(void) {
 }
 
 static int issue_request(int start, int dest, int type) {
-    printk(KERN_INFO "ISSUE_REQUEST CALLED: start=%d, dest=%d, type=%d\n", start, dest, type);
+    printk(KERN_INFO "ISSUE_REQUEST CALLED: start=%d, dest=%d, type=%d\n", start, dest,
+           type);
     if (start < 1 || start > NUM_FLOORS || dest < 1 || dest > NUM_FLOORS) {
         printk(KERN_WARNING "Invalid floor: start=%d, dest=%d\n", start, dest);
         return -EINVAL;
@@ -72,11 +73,12 @@ static int issue_request(int start, int dest, int type) {
     return 0;
 }
 
-static int elevator_stop(void) {
+static int stop_elevator(void) {
+    printk(KERN_INFO "ELEVATOR Stopping (please do it, thank you.)");
     mutex_lock(&elev_lock);
-        elevator->state = OFFLINE;           // <-- make it visible to /proc and worker
+    elevator->state = OFFLINE;  // <-- make it visible to /proc and worker
     mutex_unlock(&elev_lock);
-    
+
     if (worker_thread) {
         kthread_stop(worker_thread);
         worker_thread = NULL;
@@ -97,7 +99,7 @@ static int __init initialize_elevator(void) {
     // STUB_start_elevator these functions will be called
     STUB_start_elevator = &start_elevator;
     STUB_issue_request = &issue_request;
-    STUB_stop_elevator = &elevator_stop;
+    STUB_stop_elevator = &stop_elevator;
     mutex_init(&elev_lock);
 
     printk(KERN_INFO "Loaded elevator module FROM OVER HERE.");
@@ -144,12 +146,12 @@ static int __init initialize_elevator(void) {
 }
 
 static void __exit rm_elevator(void) {
+    printk(KERN_INFO "Unloaded elevator module.");
+    stop_elevator();
+
     STUB_start_elevator = NULL;
     STUB_issue_request = NULL;
     STUB_stop_elevator = NULL;
-
-    printk(KERN_INFO "Unloaded elevator module.");
-    elevator_stop();
 
     remove_proc_entry(PROC_FNAME, NULL);
     pr_info("/proc/%s removed\n", PROC_FNAME);
