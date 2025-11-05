@@ -13,7 +13,7 @@
 #include "linux/gfp_types.h"
 #include "linux/list.h"
 
-struct waiting_pet floor_queues[NUM_FLOORS];
+struct list_head floor_queues[NUM_FLOORS];
 struct mutex elev_lock;
 struct elevator* elevator;
 struct task_struct* worker_thread;
@@ -117,7 +117,7 @@ int elev_worker(void* data) {
             int all_empty = 1;
 
             for (int i = 0; i < NUM_FLOORS; ++i) {
-                if (!list_empty(&floor_queues[i].node)) {
+                if (!list_empty(&floor_queues[i])) {
                     all_empty = 0;
                     break;
                 }
@@ -137,7 +137,7 @@ int elev_worker(void* data) {
 
         // Board waiting pets at current floor
         int floor_idx = elevator->current_floor - 1;
-        struct list_head* floor_q = &floor_queues[floor_idx].node;
+        struct list_head* floor_q = &floor_queues[floor_idx];
         board_waiting_pets(floor_q);
 
         // Determine next direction
@@ -163,7 +163,7 @@ int elev_worker(void* data) {
             int min_distance = NUM_FLOORS + 1;
 
             for (int i = 0; i < NUM_FLOORS; ++i) {
-                if (!list_empty(&floor_queues[i].node)) {
+                if (!list_empty(&floor_queues[i])) {
                     int distance = abs((i + 1) - elevator->current_floor);
                     
                     if (distance < min_distance) {
@@ -272,12 +272,12 @@ char* generate_proc_string(void) {
                             elevator->current_weight);
 
     for (int i = NUM_FLOORS - 1; i >= 0; --i) {
-        char* floor_queue_str = queue_to_str(&floor_queues[i].node);
+        char* floor_queue_str = queue_to_str(&floor_queues[i]);
         buffer_idx += scnprintf(buffer + buffer_idx, max_sz - buffer_idx,
                                 "%s Floor %d: %d %s\n",
                                 elevator->current_floor == (i + 1) ? "[*]" : "[ ]",
                                 i + 1, 
-                                get_queue_size(&floor_queues[i].node), 
+                                get_queue_size(&floor_queues[i]), 
                                 floor_queue_str);
         kfree(floor_queue_str);
     }

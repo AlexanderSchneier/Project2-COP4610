@@ -59,7 +59,7 @@ static int issue_request(int start, int dest, int type) {
 
     mutex_lock(&elev_lock);
     elevator->num_pets_waiting += 1;
-    list_add_tail(&patient_pet->node, &floor_queues[start - 1].node);
+    list_add_tail(&patient_pet->node, &floor_queues[start - 1]);
     mutex_unlock(&elev_lock);
 
     printk(KERN_INFO "Added pet to floor %d queue", start);
@@ -104,8 +104,7 @@ static int __init initialize_elevator(void) {
 
     printk(KERN_INFO "In lock");
     for (int i = 0; i < NUM_FLOORS; ++i) {
-        INIT_LIST_HEAD(&floor_queues[i].node);
-        floor_queues[i].pet = NULL;
+        INIT_LIST_HEAD(&floor_queues[i]);
     }
 
     mutex_unlock(&elev_lock);
