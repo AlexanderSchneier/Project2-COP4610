@@ -97,8 +97,7 @@ cat /proc/timer
 ```
 ## Execution: Part 3
 
-You can simply run `part3/run-part3.sh` which will make, remove (if neccecary), 
-insert, and then run watch to view the proc file
+You can simply run `part3/run-part3.sh` which will make the kernel mod, remove (if neccecary) and insert the kernel mod, and then run watch to view the proc file
 
 ## Development Log
 Each member records their contributions here.
