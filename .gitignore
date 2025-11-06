@@ -8,3 +8,10 @@
 *compile_commands.json
 *elevator_log.txt
 *run-part3.sh
+
+# Ignore files that dont have a "."
+*
+!*.*
+
+part1
+empty
