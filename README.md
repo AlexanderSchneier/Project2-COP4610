@@ -106,9 +106,9 @@ Each member records their contributions here.
 
 | Date       | Work Completed / Notes |
 |------------|------------------------|
-| YYYY-MM-DD | [Description of task]  |
-| YYYY-MM-DD | [Description of task]  |
-| YYYY-MM-DD | [Description of task]  |
+| 2025-11-01 | Completed part 1 during meeting | 
+| 2025-11-04 | part 3 step 5  |
+| 2025-11-05 | debuggining on part 3 step 4 |
 
 ### [Brendan]
 
@@ -134,17 +134,13 @@ Document in-person meetings, their purpose, and what was discussed.
 | Date       | Attendees            | Topics Discussed | Outcomes / Decisions |
 |------------|----------------------|------------------|-----------------------|
 | 2025-10-17 | [Lex, Brendan, Carson]              | [Part 1 and 2]   | [Completed Part 1, requested VM for Part 2 and 3]  |
-| YYYY-MM-DD | [Names]              | [Agenda items]   | [Actions/Next steps]  |
-| YYYY-MM-DD | [Names]              | [Agenda items]   | [Actions/Next steps]  |
 
 
 
 ## Bugs
-- **Bug 1**: This is bug 1.
-- **Bug 2**: This is bug 2.
-- **Bug 3**: This is bug 3.
+- **Bug 1**: MakeFile accidentally made the exe from consumer instead of producer.
+- **Bug 2**: Used MDELAY instead of MSleep which was causing Hold and wait which was making the program hang.
 
-## Considerations
 
 
 
