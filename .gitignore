@@ -9,9 +9,9 @@
 *elevator_log.txt
 *run-part3.sh
 
-# Ignore files that dont have a "."
-*
-!*.*
-
+# object files
 part1
 empty
+producer
+consumer
+test-syscalls
