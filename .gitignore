@@ -7,7 +7,6 @@
 *.symvers
 *compile_commands.json
 *elevator_log.txt
-*run-part3.sh
 
 # object files
 part1
