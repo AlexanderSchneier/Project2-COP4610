@@ -42,24 +42,36 @@
 
 ## File Listing
 ```
-elevator/
+.
 ├── Makefile
-├── part1/
-│   ├── empty.c
-│   ├── empty.trace
-│   ├── part1.c
-│   ├── part1.trace
-│   └── Makefile
-├── part2/
-│   ├── src/
-│   └── Makefile
-├── part3/
-│   ├── src/
-│   ├── tests/
-│   ├── Makefile
-│   └── sys_call.c
-├── Makefile
-└── README.md
+├── part2
+│   ├── Makefile
+│   └── my_timer.c
+├── part3
+│   ├── Makefile
+│   ├── run-part3.sh
+│   ├── src
+│   │   ├── core.c
+│   │   ├── core.h
+│   │   └── elevator_main.c
+│   ├── syscalls.c
+│   └── tests
+│       ├── elevator-test
+│       │   ├── consumer.c
+│       │   ├── Makefile
+│       │   ├── producer.c
+│       │   ├── README.md
+│       │   └── wrappers.h
+│       └── system-calls-test
+│           ├── Makefile
+│           ├── README.md
+│           ├── syscheck.c
+│           ├── test-syscalls.c
+│           └── test-syscalls.h
+├── README.md
+
+7 directories, 21 files
+
 
 ```
 # How to Compile & Execute
@@ -68,48 +80,25 @@ elevator/
 - **Compiler**: e.g., `gcc` for C/C++, `rustc` for Rust.
 - **Dependencies**: List any libraries or frameworks necessary (rust only).
 
-## Part 1
+## Compilation: Part 1, 2, and 3
 
-### Compilation
-For a C/C++ example:
-```bash
+```
+cd Project2-COP4610
 make
 ```
-This will build the executable in ...
-### Execution
-```bash
-make run
-```
-This will run the program ...
 
-## Part 2
+## Execution: Part 2
 
-### Compilation
-For a C/C++ example:
-```bash
-make
 ```
-This will build the executable in ...
-### Execution
-```bash
-make run
+sudo insmod my_timer.ko
+cat /proc/timer
+sleep 2
+cat /proc/timer
 ```
-This will run the program ...
+## Execution: Part 3
 
-
-## Part 3
-
-### Compilation
-For a C/C++ example:
-```bash
-make
-```
-This will build the executable in ...
-### Execution
-```bash
-make run
-```
-This will run the program ...
+You can simply run `part3/run-part3.sh` which will make, remove (if neccecary), 
+insert, and then run watch to view the proc file
 
 ## Development Log
 Each member records their contributions here.
@@ -135,9 +124,9 @@ Each member records their contributions here.
 
 | Date       | Work Completed / Notes |
 |------------|------------------------|
-| YYYY-MM-DD | [Description of task]  |
-| YYYY-MM-DD | [Description of task]  |
-| YYYY-MM-DD | [Description of task]  |
+| 2025-11-03 | Begin implementing Part 3, Step 4  |
+| 2025-11-04 | Continue implementing Part 3 Step 4  |
+| 2025-11-05 | Finish implementing Part 3 step 4  |
 
 
 ## Meetings
